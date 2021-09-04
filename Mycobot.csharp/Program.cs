@@ -51,7 +51,7 @@ namespace Mycobot.csharp
                                 SaveAngles(mc, 2);
                                 break;
 
-                            // Load current pose
+                            // Load a pose
                             case ConsoleKey.D4:
                                 LoadAngles(mc, 0);
                                 break;
@@ -62,7 +62,7 @@ namespace Mycobot.csharp
                                 LoadAngles(mc, 2);
                                 break;
  
-                            // Release All Servo Motors
+                            // Release All Servos
                             case ConsoleKey.R:
                                 mc.ReleaseAllServos();
                                 break;

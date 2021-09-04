@@ -2,6 +2,26 @@
 
 A Mycobot C# library for .NET Core / .NET Framework.
 
+## Prerequisite
+
+### Tool
+
+[Mystudio v3.1.2](https://github.com/elephantrobotics/myStudio/releases/tag/v3.1.2)
+
+### Firmware
+
+|Device|Firmware|
+|---|---|
+|BASIC|minirobot v0.4|
+|ATOM|AtomMain v3.2|
+
+![BASIC](images/basic.png)
+![ATOM](images/atom.png)
+
+### IDE
+
+[Visual Studio 2019](https://visualstudio.microsoft.com/downloads/)
+
 ## Supported API
 
 ### Overall status
