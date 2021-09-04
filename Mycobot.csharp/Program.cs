@@ -12,7 +12,7 @@ namespace Mycobot.csharp
             using (MyCobot mc = new MyCobot("COM5"))
             {
                 mc.Open();
-                Thread.Sleep(2000);
+                Thread.Sleep(5000);
 
                 // Get current pose & Initialize
                 var init = mc.GetAngles();
@@ -66,7 +66,9 @@ namespace Mycobot.csharp
                             case ConsoleKey.R:
                                 mc.ReleaseAllServos();
                                 break;
-
+                            case ConsoleKey.C:
+                                mc.SendCoord(1,-50,10);
+                                break;
                             // Exit
                             case ConsoleKey.Escape:
                                 stop = true;

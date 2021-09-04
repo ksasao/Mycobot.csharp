@@ -89,7 +89,7 @@ namespace Mycobot
         public int SystemVersion()
         {
             Message(Code.GetSystemVersion);
-            var data = WaitForReply();
+            var data = WaitForReply(40);
             return (int)data[0];
         }
 
@@ -116,7 +116,7 @@ namespace Mycobot
         public bool IsPowerOn()
         {
             Message(Code.IsPoweredOn);
-            var data = WaitForReply(50);
+            var data = WaitForReply(120);
             return data.Length != 0;
         }
 
@@ -149,7 +149,7 @@ namespace Mycobot
         public int[] GetAngles()
         {
             Message(Code.GetAngles);
-            var data = WaitForReply();
+            var data = WaitForReply(40);
 
             if (data.Length != 6 * 2)
             {
@@ -265,7 +265,7 @@ namespace Mycobot
             data.Add((byte)speed);
             data.Add((byte)mode);
 
-            Message(Code.WriteCoord, data);
+            Message(Code.WriteCoords, data);
         }
         #endregion
 
