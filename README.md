@@ -1,33 +1,78 @@
-# This is a simple c# api about mycobot
+# Mycobot Sharp
 
-> dotnet version: 5.0.103
+A Mycobot C# library for .NET Core / .NET Framework.
 
-You can download the `.dll` at [Release](https://github.com/elephantrobotics/Mycobot.csharp/releases)
+## Supported API
 
-And import it to you Project.
+### Overall status
+
+```C#
+// get robot version
+public int RobotVersion();
+
+// get system version
+public int SystemVersion();
+
+// enable Atom connection
+public void PowerOn();
+
+// disable Atom connection
+public void PoweOff();
+
+// power supplied?
+public bool IsPowerOn();
+
+// release all servos
+public void ReleaseAllServos();
+
+// Atom connected?
+public bool IsControllerConnected();
+```
+
+### MDI mode and operation
 
 ```c#
-/// arm power on
-public void PowerOn()
+// get all angles
+public int[] GetAngles();
 
-/// arm power off
-public void PowerOff()
+// send specific joint angle
+public void SendAngle(int jointNo, int angle, int speed);
 
-/// Send one angle value
-public void SendOneAngle(int jointNo, int angle, int speed)
+// send all joint angles
+public void SendAngles(int[] angles, int speed);
 
-/// Send all angles
-public void SendAngles(int[] angles, int speed)
+// get all coords
+public int[] GetCoords();
 
-/// Get all angles
-public int[] GetAngles()
+// send specific coord
+public void SendCoord(int coord, int value, int speed);
 
-/// Send one coord
-public void SendOneCoord(int coord, int value, int speed)
+// send all coords
+public void SendCoords(int[] coords, int speed, int mode);
+```
 
-/// Send all coords to arm
-public void SendCoords(int[] coords, int speed, int mode)
+### Servo control
 
-/// Get all coord
-public int[] GetCoords()
+```c#
+// servo enabled?
+public bool IsServoEnable(int servoId);
+
+// all servos enabled?
+public bool IsAllServoEnable();
+
+// get servo data
+public byte GetServoData(int servoNo, int dataId);
+
+// power off designated servo
+public void ReleaseServo(int servoId);
+
+// power on designated servo
+public void FocusServo(int servoId);
+```
+
+### Atom IO
+
+```C#
+// Set Atom LED
+public void SetColor(byte r, byte g, byte b);
 ```

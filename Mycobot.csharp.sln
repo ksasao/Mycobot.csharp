@@ -1,6 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mycobot.csharp", "Mycobot.csharp\Mycobot.csharp.csproj", "{9EA4826D-B9CE-45BB-B0D9-6164BB6C84E3}"
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mycobot.csharp", "Mycobot.csharp\Mycobot.csharp.csproj", "{9EA4826D-B9CE-45BB-B0D9-6164BB6C84E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mycobot", "Mycobot\Mycobot.csproj", "{09177CD9-3B06-4461-8DFC-80BE9F8C6630}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +17,15 @@ Global
 		{9EA4826D-B9CE-45BB-B0D9-6164BB6C84E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EA4826D-B9CE-45BB-B0D9-6164BB6C84E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EA4826D-B9CE-45BB-B0D9-6164BB6C84E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09177CD9-3B06-4461-8DFC-80BE9F8C6630}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09177CD9-3B06-4461-8DFC-80BE9F8C6630}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09177CD9-3B06-4461-8DFC-80BE9F8C6630}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09177CD9-3B06-4461-8DFC-80BE9F8C6630}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {55A30AC7-9532-4C30-8524-076E4AD0EC7A}
 	EndGlobalSection
 EndGlobal
