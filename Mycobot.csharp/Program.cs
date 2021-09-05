@@ -30,7 +30,10 @@ namespace Mycobot.csharp
                 Random random = new Random();
 
                 mc.SetColor((byte)random.Next(255), (byte)random.Next(255), (byte)random.Next(255));
-                mc.SetPinMode(22, false);
+
+                mc.SetPinMode(22, true);
+                mc.SetPinMode(19, true);
+
                 bool stop = false;
                 while (!stop)
                 {
@@ -68,19 +71,28 @@ namespace Mycobot.csharp
                             case ConsoleKey.R:
                                 mc.ReleaseAllServos();
                                 break;
+
+                            // Suction pump controll
+                            // https://www.elephantrobotics.com/docs/myCobot-en/3-development/7-side_products/7.1.2-sunction_pump.html
                             case ConsoleKey.N:
-                                mc.SetDigitalOuput(22, true);
+                                mc.SetBasicDigitalOutput(2, true);
+                                Thread.Sleep(100);
+                                mc.SetBasicDigitalOutput(5, true);
                                 break;
                             case ConsoleKey.M:
-                                mc.SetDigitalOuput(22, false);
+                                mc.SetBasicDigitalOutput(2, false);
+                                Thread.Sleep(100);
+                                mc.SetBasicDigitalOutput(5, false);
                                 break;
+
                             // Exit
                             case ConsoleKey.Escape:
                                 stop = true;
                                 continue;
                         }
                     }
-                    Console.WriteLine(mc.GetDigitalInput(23));
+                    //Console.WriteLine(mc.GetDigitalInput(23));
+                    //Console.WriteLine(mc.GetServoData(1,0));
                     foreach (var a in angles)
                     {
                         Console.Write($"{a} ");

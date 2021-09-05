@@ -100,5 +100,7 @@
         public const byte GetEndType = 0x8A;
         public const byte MovecCoordsDefault = 0x8B;
         public const byte MovecCoords = 0x8C;
+
+        public const byte SetBasicDigitalOutput = 0xa0;
     }
 }

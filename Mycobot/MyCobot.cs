@@ -373,6 +373,16 @@ namespace Mycobot
 
         #endregion
 
+        /// <summary>
+        /// Set digital output
+        /// </summary>
+        /// <param name="pinNo">GPIO Pin (BASIC)</param>
+        /// <param name="pinState">true: HIGH(+3.3V) / false: LOW(0V)</param>
+        public void SetBasicDigitalOutput(int pinNo, bool pinState)
+        {
+            Message(Code.SetBasicDigitalOutput, new byte[] { (byte)pinNo, (byte)(pinState ? 1 : 0) });
+        }
+
         private static byte[] Int16ToBytes(int v)
         {
             var res = new byte[2];
