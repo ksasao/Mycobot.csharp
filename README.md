@@ -13,7 +13,7 @@ A Mycobot C# library for .NET Core / .NET Framework.
 |Device|Firmware|
 |---|---|
 |BASIC|minirobot v0.4|
-|ATOM|AtomMain v3.2|
+|ATOM|AtomMain v4.0|
 
 ![BASIC](images/basic.png)
 ![ATOM](images/atom.png)
@@ -28,10 +28,10 @@ A Mycobot C# library for .NET Core / .NET Framework.
 
 ```C#
 // get robot version
-public int RobotVersion();
+public int GetRobotVersion();
 
 // get system version
-public int SystemVersion();
+public int GetSystemVersion();
 
 // enable Atom connection
 public void PowerOn();
@@ -93,6 +93,25 @@ public void FocusServo(int servoId);
 ### Atom IO
 
 ```C#
+// Set Pin mode
+public void SetPinMode(int pinNo, bool pinState);
+
+// Set Digital Output
+public void SetDigitalOuput(int pinNo, bool pinState);
+
+// Set Digital Input
+ public bool GetDigitalInput(int pinNo);
+
+// Set PWM Output 
+public void SetPwmOutput(int pinNo, short freq, byte duty);
+
 // Set Atom LED
 public void SetColor(byte r, byte g, byte b);
+```
+
+### Basic IO
+
+```C#
+// Set Digital Output for BASIC (Suction pump controll: G2, G5)
+public void SetBasicDigitalOutput(int pinNo, bool pinState)
 ```

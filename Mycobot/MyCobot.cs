@@ -361,6 +361,22 @@ namespace Mycobot
         }
 
         /// <summary>
+        /// Set PWM output
+        /// </summary>
+        /// <param name="pinNo">GPIO Pin (ATOM)</param>
+        /// <param name="freq">Frequency (Hz)</param>
+        /// <param name="duty">Duty (0-254)</param>
+        public void SetPwmOutput(int pinNo, short freq, byte duty)
+        {
+            Message(Code.SetPwmOutput, new byte[] {
+                (byte)pinNo,
+                (byte)((freq >> 8) & 0xFF),
+                (byte)(freq & 0xFF),
+                duty
+            });
+        }
+
+        /// <summary>
         /// Set the light color
         /// </summary>
         /// <param name="r">Red</param>
@@ -373,6 +389,7 @@ namespace Mycobot
 
         #endregion
 
+        #region [BASIC]
         /// <summary>
         /// Set digital output
         /// </summary>
@@ -382,6 +399,7 @@ namespace Mycobot
         {
             Message(Code.SetBasicDigitalOutput, new byte[] { (byte)pinNo, (byte)(pinState ? 1 : 0) });
         }
+        #endregion
 
         private static byte[] Int16ToBytes(int v)
         {

@@ -13,6 +13,7 @@ namespace Mycobot.csharp
             {
                 mc.Open();
                 Thread.Sleep(5000);
+                mc.PowerOn();
 
                 Console.WriteLine($"System Version: {mc.GetSystemVersion()}");
                 Console.WriteLine($"Robot Version : {mc.GetRobotVersion()}");
@@ -27,14 +28,14 @@ namespace Mycobot.csharp
                 while (mc.GetCoords().Length==0){
                     // wait for first coords data received
                 }
+
+                // set LED color
                 Random random = new Random();
-
                 mc.SetColor((byte)random.Next(255), (byte)random.Next(255), (byte)random.Next(255));
-
-                mc.SetPinMode(22, true);
-                mc.SetPinMode(19, true);
+                Thread.Sleep(100);
 
                 bool stop = false;
+                byte duty = 128;
                 while (!stop)
                 {
                     var angles = mc.GetAngles();
@@ -85,14 +86,20 @@ namespace Mycobot.csharp
                                 mc.SetBasicDigitalOutput(5, false);
                                 break;
 
+                            case ConsoleKey.D:
+                                Console.WriteLine($"Duty: {100 * duty / 256} %");
+                                mc.SetPwmOutput(23, 1000, duty);
+                                duty = (byte)((duty + 10) & 0xFF);
+                                break;
+
                             // Exit
                             case ConsoleKey.Escape:
                                 stop = true;
                                 continue;
                         }
                     }
-                    //Console.WriteLine(mc.GetDigitalInput(23));
-                    //Console.WriteLine(mc.GetServoData(1,0));
+                    Console.WriteLine($"Servo 1: {mc.IsServoEnable(1)}");
+                    Console.WriteLine($"All Servo: {mc.IsAllServoEnable()}");
                     foreach (var a in angles)
                     {
                         Console.Write($"{a} ");
