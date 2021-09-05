@@ -14,6 +14,8 @@ namespace Mycobot.csharp
                 mc.Open();
                 Thread.Sleep(5000);
 
+                Console.WriteLine($"System Version: {mc.GetSystemVersion()}");
+                Console.WriteLine($"Robot Version : {mc.GetRobotVersion()}");
                 // Get current pose & Initialize
                 var init = mc.GetAngles();
                 for (int i = 0; i < 3; i++)
@@ -28,7 +30,7 @@ namespace Mycobot.csharp
                 Random random = new Random();
 
                 mc.SetColor((byte)random.Next(255), (byte)random.Next(255), (byte)random.Next(255));
-
+                mc.SetPinMode(22, false);
                 bool stop = false;
                 while (!stop)
                 {
@@ -66,8 +68,11 @@ namespace Mycobot.csharp
                             case ConsoleKey.R:
                                 mc.ReleaseAllServos();
                                 break;
-                            case ConsoleKey.C:
-                                mc.SendCoord(1,-50,10);
+                            case ConsoleKey.N:
+                                mc.SetDigitalOuput(22, true);
+                                break;
+                            case ConsoleKey.M:
+                                mc.SetDigitalOuput(22, false);
                                 break;
                             // Exit
                             case ConsoleKey.Escape:
@@ -75,6 +80,7 @@ namespace Mycobot.csharp
                                 continue;
                         }
                     }
+                    Console.WriteLine(mc.GetDigitalInput(23));
                     foreach (var a in angles)
                     {
                         Console.Write($"{a} ");

@@ -77,7 +77,7 @@ namespace Mycobot
         /// <summary>
         /// get robot version
         /// </summary>
-        public int RobotVersion()
+        public int GetRobotVersion()
         {
             Message(Code.GetRobotVersion);
             var data = WaitForReply();
@@ -86,7 +86,7 @@ namespace Mycobot
         /// <summary>
         /// get system version
         /// </summary>
-        public int SystemVersion()
+        public int GetSystemVersion()
         {
             Message(Code.GetSystemVersion);
             var data = WaitForReply(40);
@@ -158,7 +158,8 @@ namespace Mycobot
             var res = new int[6];
             for (var i = 0; i < 6; i++)
             {
-                res[i] = BitConverter.ToInt16(data, i * 2) / 100;
+                short v = (short)(data[i * 2] << 8 | data[i * 2 + 1]);
+                res[i] = v / 100;
             }
             return res;
         }
@@ -216,7 +217,7 @@ namespace Mycobot
             var res = new int[6];
             for (var i = 0; i < 6; i++)
             {
-                int v = BitConverter.ToInt16(data, i * 2);
+                short v = (short)(data[i*2] << 8 | data[i*2+1]);
                 res[i] = i < 3 ? v / 10 : v / 100;
             }
             return res;
@@ -324,6 +325,42 @@ namespace Mycobot
 
         #region [Atom IO]
         /// <summary>
+        /// Set pin mode
+        /// </summary>
+        /// <param name="pinNo">GPIO Pin (ATOM)</param>
+        /// <param name="pinState">true: OUTPUT / false: INPUT</param>
+        public void SetPinMode(int pinNo, bool pinState)
+        {
+            Message(Code.SetPinMode, new byte[] { (byte)pinNo, (byte)(pinState ? 1 : 0) });
+        }
+
+        /// <summary>
+        /// Set digital output
+        /// </summary>
+        /// <param name="pinNo">GPIO Pin (ATOM)</param>
+        /// <param name="pinState">true: HIGH(+3.3V) / false: LOW(0V)</param>
+        public void SetDigitalOuput(int pinNo, bool pinState)
+        {
+            Message(Code.SetDigitalOutput, new byte[] { (byte)pinNo, (byte)(pinState ? 1 : 0) });
+        }
+
+        /// <summary>
+        /// Get digital input
+        /// </summary>
+        /// <param name="pinNo">GPIO Pin (ATOM)</param>
+        /// <returns>true: HIGH(+3.3V) / false: LOW(0V)</returns>
+        public bool GetDigitalInput(int pinNo)
+        {
+            Message(Code.GetDigitalInput, (byte)pinNo);
+            var data = WaitForReply(40);
+            if (data.Length == 0)
+            {
+                return false;
+            }
+            return (data[0] > 0);
+        }
+
+        /// <summary>
         /// Set the light color
         /// </summary>
         /// <param name="r">Red</param>
@@ -333,7 +370,6 @@ namespace Mycobot
         {
             Message(Code.SetLed, new byte[] { r, g, b });
         }
-
 
         #endregion
 
@@ -374,11 +410,11 @@ namespace Mycobot
 
             // process data
             var len = (int)receivedBytes[idx] - 2;
-            if (len > receivedBytes.Length - idx - 1)
+            if (len > receivedBytes.Length - idx - 2)
                 return Array.Empty<byte>();
 
             byte[] data = new byte[len];
-            Array.Copy(receivedBytes, idx + 1, data, 0, len);
+            Array.Copy(receivedBytes, idx + 2, data, 0, len);
             return data;
         }
         private byte[] WaitForReply()
