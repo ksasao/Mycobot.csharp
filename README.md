@@ -112,6 +112,6 @@ public void SetColor(byte r, byte g, byte b);
 ### Basic IO
 
 ```C#
-// Set Digital Output for BASIC (Suction pump controll: G2, G5)
+// Set Digital Output for BASIC (Suction pump control: G2, G5)
 public void SetBasicDigitalOutput(int pinNo, bool pinState)
 ```
